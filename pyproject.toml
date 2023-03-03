@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "todo"
+name = "moetodo"
 version = "0.1.0"
-description = ""
+description = "My Overengineered Todo List"
 authors = ["Quan <124479698+quanchuen@users.noreply.github.com"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 sqlmodel = "^0.0.8"
 typer = "^0.7.0"
 pyyaml = "^6.0"
@@ -18,3 +18,9 @@ pytest = "^7.2.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+pythonpath = "src"
