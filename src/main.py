@@ -16,11 +16,14 @@ def migrate(db_url: str = typer.Option("sqlite:///:memory:", envvar="DB_URL", he
 
 
 @cli.command()
-def create(db_url: str = typer.Option("sqlite:///:memory:", envvar="DB_URL", help="Database URL")):
+def create(db_url: str = typer.Option("sqlite:///:memory:", envvar="DB_URL", help="Database URL"),
+           debug: bool = typer.Option(False, help="Debug mode")):
     engine = create_engine(db_url)
+    if debug:
+        engine.echo = True
     TodoItem.metadata.create_all(engine)
     with Session(engine) as session:
-        todo = TodoItem(title="Todo 1")
+        todo = TodoItem()
         session.add(todo)
         session.commit()
         session.refresh(todo)
